@@ -27,3 +27,7 @@ jobs:
         - name: remove container
           run: docker rm -f python-container
 
+        - name: push image
+          run: docker push techmypassion/python-app
+           
+
