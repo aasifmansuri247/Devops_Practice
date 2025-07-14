@@ -1,0 +1,29 @@
+name: push image
+on:
+  push:
+    branch:
+         - python-app
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+      steps:
+        - name: checkout code
+          uses: action/checkout@v3
+
+        - name: docker login
+          run: |
+           echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
+
+        - name: docker build
+          run: docker build -t techmypassion/python-app:latest .
+
+        - name: docker container run
+          run: docker run -d --name python-container -p 5000:5000 techmypassion/python-app:latest
+
+        - name: checking app working or not
+          run: curl --fail http://localhost:5000 || (echo "app run test failed" $$ docker logs python-container && exit 1)  
+
+        - name: remove container
+          run: docker rm -f python-container
+
