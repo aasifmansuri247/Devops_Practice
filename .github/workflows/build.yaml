@@ -1,0 +1,38 @@
+name: push image
+on:
+  push:
+    branch:
+         - python-app
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: docker login
+        run: |
+          echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
+
+      - name: docker build
+        run: docker build -t techmypassion/flask-app:v2 .
+
+      - name: docker container run
+        run: |
+          docker run -d --name python-container -p 5000:5000 techmypassion/python-app:latest
+          sleep 5
+
+      - name: Test application inside container
+        run: |
+          sleep 5
+          echo "🧪 Checking Flask app on http://localhost:5000"
+          curl --retry 5 --retry-delay 2 --fail http://localhost:5000 || (echo "❌ App run test failed" && docker logs python-container && exit 1)  
+
+      - name: remove container
+        run: docker rm -f python-container
+
+      - name: push image
+        run: docker push techmypassion/flask-app:v2
+           
+
