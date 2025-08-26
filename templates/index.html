@@ -2,49 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flask App Deployed with Terraform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Demo Page</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
             text-align: center;
             padding: 50px;
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
-            color: #38bdf8;
         }
         p {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
         }
-        .tag {
+        .btn {
             display: inline-block;
-            background-color: #1e293b;
-            border-radius: 5px;
-            padding: 5px 12px;
-            margin: 5px;
+            padding: 15px 30px;
+            background: #ff6f61;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #ff3b2f;
+        }
+        footer {
+            margin-top: 50px;
             font-size: 0.9rem;
-            color: #94a3b8;
+            color: #ccc;
         }
     </style>
 </head>
 <body>
-    <h1>🚀 Flask App Deployed on AWS EC2</h1>
-    <p>Provisioned using <strong>Terraform</strong></p>
-    <p>Automated via <strong>GitHub Actions</strong></p>
-    <p>Secured with <strong>NGINX + SSL (Let's Encrypt)</strong></p>
-    <p>Domain: <strong>https://bookdevops.shop</strong></p>
-
-    <div>
-        <span class="tag">Terraform</span>
-        <span class="tag">Docker</span>
-        <span class="tag">AWS EC2</span>
-        <span class="tag">NGINX</span>
-        <span class="tag">GitHub Actions</span>
-        <span class="tag">HTTPS</span>
-    </div>
+    <h1>🚀 Welcome to Kubernetes!</h1>
+    <p>This app is running inside a Kubernetes Pod using Docker!</p>
+    <a href="https://kubernetes.io" class="btn">Learn Kubernetes</a>
+    <footer>
+        <p>Deployed by <strong>TechMate</strong> | Powered by Docker & Kubernetes</p>
+    </footer>
 </body>
 </html>
