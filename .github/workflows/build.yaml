@@ -1,7 +1,7 @@
 name: push image
 on:
   push:
-    branch:
+    branches:
          - python-app
 
 jobs:
@@ -26,8 +26,8 @@ jobs:
       - name: Test application inside container
         run: |
           sleep 5
-          echo "🧪 Checking Flask app on http://localhost:5000"
-          curl --retry 5 --retry-delay 2 --fail http://localhost:5000 || (echo "❌ App run test failed" && docker logs python-container && exit 1)  
+          echo "Checking Flask app on http://localhost:5000"
+          curl --retry 5 --retry-delay 2 --fail http://localhost:5000 || (echo "App run test failed" && docker logs python-container && exit 1)  
 
       - name: remove container
         run: docker rm -f python-container
